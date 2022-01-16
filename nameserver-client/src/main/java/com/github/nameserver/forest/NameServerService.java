@@ -12,8 +12,8 @@ import java.util.Set;
 
 public interface NameServerService {
 
-    @Request(url = "http://" + "{nameServerDomain}" + Constants.UriConstants.HEALTH_CHECK_PATH)
-    void health(@Var("nameServerDomain")String nameServerDomain);
+    @Request(url = "http://" + "{nameServerDomain}" + Constants.UriConstants.HEALTH_CHECK_PATH, async = true)
+    void health(@Var("nameServerDomain")String nameServerDomain, OnSuccess onSuccess, OnError onError);
 
     @Request(url = "http://" + "{nameServerDomain}" + Constants.UriConstants.CLIENT_REGISTER_PATH, async = true)
     void register(@Var("nameServerDomain")String nameServerDomain, @Query("app")String app, @Query("serverDomain")String serverDomain, OnSuccess onSuccess, OnError onError);

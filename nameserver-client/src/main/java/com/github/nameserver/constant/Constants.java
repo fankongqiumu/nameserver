@@ -4,11 +4,26 @@ public interface Constants {
 
     String NAMESERVER_MOMAIN = "nameserver.domain";
 
-     interface UriConstants{
-        public static final String HEALTH_CHECK_PATH = "/health";
+    String DEFAULT_DELIMITER = ",";
 
-        public static final String CLIENT_REGISTER_PATH = "/register";
+    int DEFAULT_RETRY = 3;
 
-        public static final String FETCH_SERVER_DOMAINS_PATH = "/server/domain/list";
+
+    interface UriConstants {
+        String HEALTH_CHECK_PATH = "/health";
+
+        String CLIENT_REGISTER_PATH = "/register";
+
+        String FETCH_SERVER_DOMAINS_PATH = "/server/domain/list";
     }
+
+    interface NumberConstants {
+        int INTEGER_ZERO = 0;
+        int INTEGER_ONE = 1;
+    }
+
+    interface BeanNameConstants {
+        String NAMESERVER_CLIENT = "nameServerClient";
+    }
+
 }

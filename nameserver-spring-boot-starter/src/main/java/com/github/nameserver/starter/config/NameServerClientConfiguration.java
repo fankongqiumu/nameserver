@@ -1,19 +1,30 @@
 package com.github.nameserver.starter.config;
 
 import com.github.nameserver.NameServerClient;
-import org.springframework.beans.factory.annotation.Value;
+import com.github.nameserver.constant.Constants;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
-public class NameServerClientConfiguration {
+public class NameServerClientConfiguration implements EnvironmentAware {
 
-    @Value("${nameserver.domain}")
-    private String nameServerDomain;
+    private Environment environment;
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
 
 
-    @Bean(name = "nameServerClient")
+    @Bean(name = Constants.BeanNameConstants.NAMESERVER_CLIENT)
     public NameServerClient nameServerClient(){
-        return NameServerClient.getInstance(nameServerDomain, true);
+        String property = environment.getRequiredProperty(Constants.NAMESERVER_MOMAIN);
+        List<String> domains = Arrays.asList(property.split(Constants.DEFAULT_DELIMITER));
+        return NameServerClient.getInstance(domains, true);
     }
 }
